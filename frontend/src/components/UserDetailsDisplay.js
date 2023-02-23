@@ -111,6 +111,8 @@ function UserDetailsDisplay() {
         console.log(record)
       })
     } catch (error) {
+      setBookBtn(!BookBtn);
+      setBookedBtn(!BookedBtn);
       alert("Already Booked!!!");
       console.log(error.response.data);
       //toast.error(error.message);

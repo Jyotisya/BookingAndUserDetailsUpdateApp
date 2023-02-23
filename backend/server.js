@@ -11,24 +11,24 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-const Storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/')
-      },
-    filename: (req,file,cb)=>{
-        cb(null, file.originalname);
-    },
-});
+// const Storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'uploads/')
+//       },
+//     filename: (req,file,cb)=>{
+//         cb(null, file.originalname);
+//     },
+// });
 
-const fileFilter = (req, file, cb)  => {
-    const allowedFileTypes = ['image/ jpeg', 'image/jpg', 'image/png'];
-    if(allowedFileTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
-const upload = multer({Storage,fileFilter});
+// const fileFilter = (req, file, cb)  => {
+//     const allowedFileTypes = ['image/ jpeg', 'image/jpg', 'image/png'];
+//     if(allowedFileTypes.includes(file.mimetype)) {
+//         cb(null, true);
+//     } else {
+//         cb(null, false);
+//     }
+// }
+// const upload = multer({Storage,fileFilter});
 
 const PORT = process.env.PORT || 5000;
   
@@ -36,7 +36,7 @@ app.get("/",(req,res)=>{
     res.send("landing page");
 });
 
-app.post("/api/userdetails",upload.single('photo'),async(req,res)=>{
+app.post("/api/userdetails",async(req,res)=>{
     try {
         const userdetails = await Userdetails.create(req.body);
         res.status(200).json(userdetails)

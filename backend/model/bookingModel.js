@@ -28,7 +28,6 @@ const bookingSchema = mongoose.Schema(
         },
         HandImage:{
             type:String,
-            required: [true]
         }
     },
     {
